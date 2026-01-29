@@ -92,7 +92,6 @@ function showToast(mensaje) {
 
 
 document.addEventListener("DOMContentLoaded", function() {
-
     
     const button = document.getElementById("spinButton");
     
