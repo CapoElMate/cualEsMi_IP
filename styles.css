@@ -1,0 +1,127 @@
+html,
+body {
+    min-height: 100vh;
+    margin: 0;
+}
+
+.degradado{
+    background: linear-gradient(#ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff);
+    position: fixed;
+    display: block;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+
+    animation: animarFondo 20s ease infinite;
+        
+}
+
+body {
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    text-align: center;
+    perspective: 800px; /* enables depth perception for the 3D spin */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+h1{
+   font-family: 'comic sans ms', cursive, sans-serif;
+   font-size: 500%;
+   color: white;
+   text-shadow: 2px 2px 4px #000000;
+   margin: 10px 0;
+   word-break: break-all;
+}
+
+.ip {
+    display: inline-block;
+    transform-style: preserve-3d;   
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    box-shadow: 2px 2px 4px #000000;
+}
+
+@keyframes spin3d {
+    0% {
+        transform: rotateY(0deg);
+    }
+    50% {
+        transform: rotateY(180deg);
+    }
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+/* Responsive para móviles */
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 150%;
+    }
+
+    .degradado {
+        width: 100%;
+        height: 100vh;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 120%;
+    }
+    
+    button {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+
+    .degradado {
+        width: 100%;
+        height: 100vh;
+    }
+}
+
+
+.toast {
+  min-width: 250px;
+  background-color: #333; /* Color de fondo */
+  color: #fff; /* Color de texto */
+  text-align: center;
+  font-size: 1cm;
+  font-family: "comic sans ms", cursive, sans-serif;
+  border-radius: 8px;
+  padding: 16px;
+  position: fixed; /* Posicionamiento fijo */
+  z-index: 100;
+  left: 50%;
+  bottom: 0px; /* Fuera de pantalla abajo */
+  transform: translateX(-50%);
+  transition: visibility 0.5s, opacity 0.5s, bottom 0.5s;
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* Clase para mostrar el toast con JS */
+.toast.show {
+  bottom: 30px;
+  visibility: visible;
+  opacity: 1;
+}

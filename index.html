@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Página de Inicio</title>
+        <link rel="stylesheet" href="styles.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="cualEsMiIP.js"></script>
+    </head>
+
+    <script>cualEsMiIP();</script>
+    <script>cualEsMiIPv6();</script>
+
+    <body>
+        <h1>Tu ip es:</h1>
+        <h1 class="ip" id="ip"></h1>
+        <h1 class="ipv6" id="ipv6"></h1>        
+        
+        <button class="btn_spin" id="spinButton">
+            Copiar IPv4 y girar       
+        </button>
+        <div class="degradado"></div>
+
+    </body>
+
+
+</html>
