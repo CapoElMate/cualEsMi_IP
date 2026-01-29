@@ -37,6 +37,7 @@ function spin() {
 
 //clase no usada, no se para de girar!
 function stopSpin() {   
+    
     const ip = document.getElementById("ip");
     const ipv6 = document.getElementById("ipv6");
     
