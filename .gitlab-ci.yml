@@ -1,0 +1,24 @@
+# Define la imagen base (puedes usar una imagen simple de Node o alpine)
+image: alpine:latest
+
+# Define el stage
+stages:
+  - deploy
+
+# Job para desplegar a GitLab Pages
+pages:
+  stage: deploy
+  script:
+    # Crea el directorio public (requerido por GitLab Pages)
+    - mkdir -p public
+    # Copia todos tus archivos HTML, CSS, JS al directorio public
+    - cp -r * public/ 2>/dev/null || cp -r *.html *.css *.js public/ 2>/dev/null || true
+    # Si tus archivos ya están en una carpeta (ej: dist, src), ajusta el comando:
+    # - cp -r dist/* public/
+  artifacts:
+    paths:
+      # GitLab Pages busca el directorio "public"
+      - public
+  only:
+    # Solo se ejecuta cuando haces push a la rama main/master
+    - main
