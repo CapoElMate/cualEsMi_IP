@@ -1,4 +1,5 @@
-let velocidadSpin = 1;
+const velocidadInicial = 0.01; // Velocidad inicial del giro
+let velocidadSpin = velocidadInicial; // Velocidad inicial del giro
 
 function cualEsMiIP() {
     $(document).ready(function () {
@@ -24,7 +25,7 @@ function spin() {
     const ip = document.getElementById("ip");
     const ipv6 = document.getElementById("ipv6");
 
-    velocidadSpin += velocidadSpin * .1; // Aumenta la velocidad en un 10% cada vez que se presiona
+    velocidadSpin = velocidadSpin * 1.05; // Aumenta la velocidad en un 5% cada vez que se presiona
     let segundos;
     
      // Puedes ajustar esta velocidad según tus preferencias
@@ -37,10 +38,13 @@ function spin() {
 
 //clase no usada, no se para de girar!
 function stopSpin() {   
-    
+
     const ip = document.getElementById("ip");
     const ipv6 = document.getElementById("ipv6");
     
+
+    velocidadSpin = velocidadInicial; // Reinicia la velocidad al valor inicial
+
     //remueve la animación
     ip.style.animation = "";
     ipv6.style.animation = "";
