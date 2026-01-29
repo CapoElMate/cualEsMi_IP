@@ -40,8 +40,9 @@ function stopSpin() {
     const ip = document.getElementById("ip");
     const ipv6 = document.getElementById("ipv6");
     
-    ip.classList.remove("spin");
-    ipv6.classList.remove("spin");
+    //remueve la animación
+    ip.style.animation = "";
+    ipv6.style.animation = "";
 }
 
 function copiarIp() {
