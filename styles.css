@@ -1,11 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
 html,
 body {
     min-height: 100vh;
     margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 .degradado{
-    background: linear-gradient(#ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff);
+    background: linear-gradient(135deg, #10b981 0%, #06b6d4 25%, #0ea5e9 50%, #3b82f6 75%, #059669 100%);
+    background-size: 400% 400%;
     position: fixed;
     display: block;
     z-index: -1;
@@ -13,17 +17,31 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0.5;
+    animation: gradientShift 15s ease infinite;
+}
 
-    animation: animarFondo 20s ease infinite;
-        
+.degradado::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(100px);
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 body {
     background-repeat: no-repeat;
     background-size: 100% 100%;
     text-align: center;
-    perspective: 800px; /* enables depth perception for the 3D spin */
+    perspective: 1200px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,32 +49,99 @@ body {
     min-height: 100vh;
     padding: 20px;
     box-sizing: border-box;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.3), transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.3), transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(14, 165, 233, 0.2), transparent 50%);
+    pointer-events: none;
 }
 
 h1{
-   font-family: 'comic sans ms', cursive, sans-serif;
-   font-size: 500%;
-   color: white;
-   text-shadow: 2px 2px 4px #000000;
-   margin: 10px 0;
+   font-family: 'Inter', sans-serif;
+   font-size: clamp(2rem, 8vw, 5rem);
+   font-weight: 700;
+   color: #ffffff;
+   text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3), 0 2px 10px rgba(0, 0, 0, 0.2);
+   margin: 15px 0;
    word-break: break-all;
+   letter-spacing: -0.02em;
+   z-index: 10;
 }
 
-.ip {
+h1:first-of-type {
+    font-size: clamp(1.5rem, 6vw, 3rem);
+}
+
+.ip, .ipv6 {
     display: inline-block;
-    transform-style: preserve-3d;   
+    transform-style: preserve-3d;
+    padding: 20px 30px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    margin: 10px 0;
+    transition: all 0.3s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.ip:hover, .ipv6:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.5);
 }
 
 button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 20px;
+    margin: 10px 8px;
+    padding: 14px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 12px;
     border: none;
-    background-color: #4CAF50;
+    background: linear-gradient(135deg, #10b981 0%, #0ea5e9 100%);
     color: white;
-    box-shadow: 2px 2px 4px #000000;
+    box-shadow: 0 4px 15px 0 rgba(16, 185, 129, 0.4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px 0 rgba(16, 185, 129, 0.6);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px 0 rgba(16, 185, 129, 0.4);
 }
 
 @keyframes spin3d {
@@ -73,55 +158,78 @@ button {
 
 /* Responsive para móviles */
 @media screen and (max-width: 768px) {
-    h1 {
-        font-size: 150%;
+    .ip, .ipv6 {
+        padding: 15px 20px;
+        margin: 8px 0;
     }
 
-    .degradado {
-        width: 100%;
-        height: 100vh;
+    button {
+        font-size: 14px;
+        padding: 12px 20px;
+        margin: 8px 5px;
     }
 }
 
 @media screen and (max-width: 480px) {
-    h1 {
-        font-size: 120%;
+    body {
+        padding: 15px;
+    }
+
+    .ip, .ipv6 {
+        padding: 12px 18px;
+        font-size: 0.8em;
     }
     
     button {
-        font-size: 16px;
-        padding: 8px 16px;
-    }
-
-    .degradado {
-        width: 100%;
-        height: 100vh;
+        font-size: 13px;
+        padding: 10px 16px;
+        margin: 6px 4px;
+        width: calc(100% - 8px);
+        max-width: 280px;
     }
 }
 
 
 .toast {
-  min-width: 250px;
-  background-color: #333; /* Color de fondo */
-  color: #fff; /* Color de texto */
+  min-width: 280px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  color: #1e293b;
   text-align: center;
-  font-size: 1cm;
-  font-family: "comic sans ms", cursive, sans-serif;
-  border-radius: 8px;
-  padding: 16px;
-  position: fixed; /* Posicionamiento fijo */
-  z-index: 100;
+  font-size: 18px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  border-radius: 16px;
+  padding: 18px 24px;
+  position: fixed;
+  z-index: 1000;
   left: 50%;
-  bottom: 0px; /* Fuera de pantalla abajo */
+  bottom: -100px;
   transform: translateX(-50%);
-  transition: visibility 0.5s, opacity 0.5s, bottom 0.5s;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   visibility: hidden;
   opacity: 0;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 /* Clase para mostrar el toast con JS */
 .toast.show {
-  bottom: 30px;
+  bottom: 40px;
   visibility: visible;
   opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media screen and (max-width: 480px) {
+  .toast {
+    min-width: calc(100% - 40px);
+    max-width: 320px;
+    font-size: 16px;
+    padding: 16px 20px;
+  }
+  
+  .toast.show {
+    bottom: 20px;
+  }
 }
