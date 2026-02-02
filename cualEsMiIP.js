@@ -1,5 +1,6 @@
 const velocidadInicial = 0.01; // Velocidad inicial del giro
 let velocidadSpin = velocidadInicial; // Velocidad inicial del giro
+const IPV6_no_disponible = "IPv6 no disponible";
 
 function cualEsMiIP() {
     $(document).ready(function () {
@@ -16,7 +17,7 @@ function cualEsMiIPv6() {
             console.log(data);
             document.getElementById("ipv6").innerText = data.ip;
         }).fail(function() {
-            document.getElementById("ipv6").innerText = "IPv6 no disponible";
+            document.getElementById("ipv6").innerText = IPV6_no_disponible;
         });
     });
 }
@@ -54,28 +55,33 @@ function copiarIp() {
     const ip = document.getElementById("ip").innerText;
     const textoACopiar = ip;  
     navigator.clipboard.writeText(textoACopiar).then(function() {
-        copiaOk();
+        toast("¡IP copiada al portapapeles!");
         console.log('Texto copiado al portapapeles: ' + textoACopiar);
     }, function(err) {
         console.error('Error al copiar el texto: ', err);
     });
 }
 
-function copiaOk() {
-    //TOAST:
-    const toast = document.createElement("div");
-    toast.className = "toast";
-    toast.innerText = "¡IP copiada al portapapeles!";
-    document.body.appendChild(toast);
-    
-    showToast("¡IP copiada al portapapeles!");
+function copiarIpv6() {
+    const ip = document.getElementById("ipv6").innerText;
+    const textoACopiar = ip;  
 
-    setTimeout(function() {
-        document.body.removeChild(toast);
-    }, 3000);
+    if(textoACopiar === IPV6_no_disponible) {
+        toast("¡No hay IPv6 para copiar!");
+        console.log('no hay ipv6 para copiar');
+        return;
+    }
+
+    navigator.clipboard.writeText(textoACopiar).then(function() {
+        toast("¡IPv6 copiada al portapapeles!");
+        console.log('Texto copiado al portapapeles: ' + textoACopiar);
+    }, function(err) {
+        console.error('Error al copiar el texto: ', err);
+    });
 }
 
-function showToast(mensaje) {
+function toast(mensaje) {
+    //TOAST:
     const toast = document.createElement("div");
     toast.className = "toast";
     toast.innerText = mensaje;
@@ -94,8 +100,11 @@ function showToast(mensaje) {
     setTimeout(function() {
         document.body.removeChild(toast);
     }, 3000);
-}
 
+    setTimeout(function() {
+        document.body.removeChild(toast);
+    }, 3000);
+}
 
 document.addEventListener("DOMContentLoaded", function() {
     
